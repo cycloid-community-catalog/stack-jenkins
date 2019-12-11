@@ -1,4 +1,18 @@
 ---
+shared:
+  - &merge-stack-and-config
+    platform: linux
+    image_resource:
+      type: docker-image
+      source:
+        repository: cycloid/cycloid-toolkit
+        tag: latest
+    run:
+      path: /usr/bin/merge-stack-and-config
+    outputs:
+      - name: merged-stack
+        path: "merged-stack"
+
 groups:
   - name: overview
     jobs:
@@ -17,9 +31,10 @@ resource_types:
       tag: ((terraform_version))
 
 resources:
-  # The ansible config (will be merged with the stack)
+  # ansible config (will be merged with the stack)
   - name: git_ansible
     type: git
+    icon: github-circle
     source:
       uri: ((git_repository))
       branch: ((git_branch))
@@ -27,7 +42,17 @@ resources:
       paths:
         - ((git_ansible_path))
 
-  # The Terraform config (will be merged with the stack)
+  # stack ansible
+  - name: git_stack-ansible
+    type: git
+    icon: github-circle
+    source:
+      uri: https://github.com/cycloid-community-catalog/stack-jenkins
+      branch: master
+      paths:
+        - ansible/*
+
+  # terraform config (will be merged with the stack)
   - name: git_terraform
     type: git
     source:
@@ -36,6 +61,16 @@ resources:
       private_key: ((git_private_key))
       paths:
         - ((git_terraform_path))
+
+  # stack terraform
+  - name: git_stack-terraform
+    type: git
+    icon: github-circle
+    source:
+      uri: https://github.com/cycloid-community-catalog/stack-jenkins
+      branch: master
+      paths:
+        - terraform/*
 
   - name: tfstate
     type: terraform
@@ -72,10 +107,25 @@ jobs:
           - get: git_terraform
             trigger: true
 
+          - get: git_stack-terraform
+            trigger: true
+
+          - task: merge-stack-and-config
+            config:
+              <<: *merge-stack-and-config
+              inputs:
+                - name: git_terraform
+                  path: "config"
+                - name: git_stack-terraform
+                  path: "stack"
+            params:
+              CONFIG_PATH: ((git_terraform_path))
+              STACK_PATH: terraform
+
           - put: tfstate
             params:
               plan_only: true
-              terraform_source: git_terraform/((git_terraform_path))/
+              terraform_source: merged_stack/
 
   # Merge and trigger an apply manually (no autostart of this job)
   - name: terraform-apply
@@ -88,15 +138,33 @@ jobs:
             trigger: false
             passed:
               - terraform-plan
+
+          - get: git_stack-terraform
+            trigger: false
+            passed:
+              - terraform-plan
+
           - get: tfstate
             trigger: false
             passed:
               - terraform-plan
 
+          - task: merge-stack-and-config
+            config:
+              <<: *merge-stack-and-config
+              inputs:
+                - name: git_terraform
+                  path: "config"
+                - name: git_stack-terraform
+                  path: "stack"
+            params:
+              CONFIG_PATH: ((git_terraform_path))
+              STACK_PATH: terraform
+
           - put: tfstate
             params:
               plan_run: true
-              terraform_source: git_terraform/((git_terraform_path))/
+              terraform_source: merged_stack/
 
   - name: terraform-destroy
     max_in_flight: 1
@@ -106,10 +174,25 @@ jobs:
           - get: git_terraform
             trigger: false
 
+          - get: git_stack-terraform
+            trigger: false
+
+          - task: merge-stack-and-config
+            config:
+              <<: *merge-stack-and-config
+              inputs:
+                - name: git_terraform
+                  path: "config"
+                - name: git_stack-terraform
+                  path: "stack"
+            params:
+              CONFIG_PATH: ((git_terraform_path))
+              STACK_PATH: terraform
+
           - put: tfstate
             params:
               action: destroy
-              terraform_source: git_terraform/((git_terraform_path))/
+              terraform_source: merged_stack/
             get_params:
               action: destroy
 
@@ -122,10 +205,26 @@ jobs:
             params: {depth: 1}
             trigger: true
 
+          - get: git_stack-ansible
+            params: {depth: 1}
+            trigger: true
+
           - get: tfstate
             trigger: true
             passed:
               - terraform-apply
+
+          - task: merge-stack-and-config
+            config:
+              <<: *merge-stack-and-config
+              inputs:
+                - name: git_ansible
+                  path: "config"
+                - name: git_stack-ansible
+                  path: "stack"
+            params:
+              CONFIG_PATH: ((git_ansible_path))
+              STACK_PATH: ansible
 
           - task: run-ansible
             config:
@@ -140,6 +239,6 @@ jobs:
               caches:
                 - path: ansible-playbook/roles
               inputs:
-                - name: git_ansible
+                - name: merged-stack
                   path: ansible-playbook
             params: ((ansible_params))
