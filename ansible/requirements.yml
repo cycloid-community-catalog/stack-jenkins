@@ -1,0 +1,5 @@
+---
+- src: https://github.com/geerlingguy/ansible-role-docker
+  version: 2.5.3
+  name: geerlingguy.docker
+  scm: git
