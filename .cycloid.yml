@@ -1,0 +1,39 @@
+---
+name: 'Jenkins'
+canonical: 'stack-jenkins'
+description: |
+  'Deploy a standalone Jenkins with Docker components on AWS EC2'
+keywords:
+  - 'jenkins'
+  - 'aws'
+author: 'Cycloid'
+image: |
+  'https://raw.githubusercontent.com/cycloid-community-catalog/stack-jenkins/master/icon.png'
+type: 'stack'
+technologies:
+  - technology: debian
+    version: 9.x
+  - technology: nginx
+    version: 1.1x
+  - technology: docker
+    version: n/a
+config:
+  # configuration of the pipeline
+  pipeline:
+    pipeline:
+      path: 'pipeline/jenkins.yml'
+    variables:
+      path: 'pipeline/variables.sample.yml'
+
+  # config of ansible for provisionning
+  ansible:
+    jenkins:
+      path: 'ansible/environments/jenkins.yml.sample'
+      destination: |
+        '($ project $)/ansible/environments/($ environment $)-jenkins.yml'
+
+  # configuration of terraform to setup the infrastructure
+  terraform:
+    jenkins:
+      path: 'terraform/jenkins.tf.sample'
+      destination: '($ project $)/terraform/($ environment $)/jenkins.tf'
