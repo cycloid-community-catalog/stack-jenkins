@@ -14,13 +14,15 @@
         image: "jenkins:{{ jenkins_version }}"
         volumes:
           - jenkins-storage:/var/jenkins_home   
+        ports:
+          - "{{ jenkins_port }}:8080"
         env:
           # since we create our user without the setup
           JAVA_OPTS: -Djenkins.install.runSetupWizard=false
 
     - name: wait for jenkins availability
       uri:
-        url: http://jenkins:8080/
+        url: "http://localhost:{{ jenkins_port }}/"
         status_code:
           - 200
           - 403
