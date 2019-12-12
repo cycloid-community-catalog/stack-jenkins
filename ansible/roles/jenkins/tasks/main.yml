@@ -8,17 +8,26 @@
         state: present
 
     - name: create jenkins container
-      docker_container:
-        name: jenkins
-        hostname: jenkins
-        image: "jenkins:{{ jenkins_version }}"
-        volumes:
-          - jenkins-storage:/var/jenkins_home   
-        ports:
+      include_role:
+        name: mhutter.docker-systemd-service
+      vars:
+        container_name: jenkins
+        container_image: "jenkins:{{ jenkins_version }}"
+        container_volumes:
+          - jenkins-storage:/var/jenkins_home
+        container_ports:
           - "{{ jenkins_port }}:8080"
-        env:
+        container_env:
           # since we create our user without the setup
           JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+        container_labels:
+          - ansible.managed=true
+          - systemd.managed=true
+          - cycloid.io=true
+        # systemd
+        enable: true
+        masked: false
+        state: started
 
     - name: wait for jenkins availability
       uri:
