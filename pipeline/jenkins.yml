@@ -48,7 +48,7 @@ resources:
     icon: github-circle
     source:
       uri: https://github.com/cycloid-community-catalog/stack-jenkins
-      branch: master
+      branch: stacks
       paths:
         - ansible/*
 
@@ -69,7 +69,7 @@ resources:
     icon: github-circle
     source:
       uri: https://github.com/cycloid-community-catalog/stack-jenkins
-      branch: master
+      branch: stacks
       paths:
         - terraform/*
 
