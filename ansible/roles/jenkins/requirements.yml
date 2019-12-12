@@ -1,5 +1,0 @@
----
-- src: https://github.com/mhutter/ansible-docker-systemd-service
-  version: v2.1.0
-  name: mhutter.docker-systemd-service
-  scm: git
