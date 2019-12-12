@@ -55,6 +55,7 @@ resources:
   # terraform config (will be merged with the stack)
   - name: git_terraform
     type: git
+    icon: github-circle
     source:
       uri: ((git_repository))
       branch: ((git_branch))
@@ -74,6 +75,7 @@ resources:
 
   - name: tfstate
     type: terraform
+    icon: terraform
     source:
       env_name: ((env))
       backend_type: s3
