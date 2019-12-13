@@ -1,11 +1,11 @@
 ---
-- hosts: tag_role_ansible:&tag_project_{{project}}:&tag_cycloid_io_true:&tag_env_{{ env }}
+- hosts: tag_role_ansible:&tag_project_{{ project }}:&tag_cycloid_io_true:&tag_env_{{ env }}
   become: true
   serial: 50%
 
   vars_files:
     - "environments/default-jenkins.yml"
-    - ["environments/{{env}}-jenkins.yml", "environments/empty.yml"]
+    - ["environments/{{ env }}-jenkins.yml", "environments/empty.yml"]
 
   pre_tasks:
     - name: install python dependencies
