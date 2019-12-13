@@ -8,6 +8,12 @@
     - ["environments/{{ env }}-jenkins.yml", "environments/empty.yml"]
 
   pre_tasks:
+    - name: install system dependencies
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - python-pip
     - name: install python dependencies
       pip:
         name: "{{ item.name }}"
