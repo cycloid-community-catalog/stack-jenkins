@@ -24,7 +24,7 @@ In order to run this task, couple elements are required within the infrastructur
 > That means if you trigger a terraform plan, to apply it, you have to go on terraform apply job
 > and click on the `+` button to trigger it. Same goes for terraform destroy.
 
-<img src="docs/pipeline.png" width="800">
+<img src="docs/pipeline.jpg" width="800">
 
 **Jobs description**
 
