@@ -20,6 +20,9 @@ aws_default_region: eu-west-1
 #+ AWS S3 bucket name to store terraform remote state file.
 terraform_storage_bucket_name: ($ organization_canonical $)-terraform-remote-state
 
+#. extra_tags (optional):
+#+ Dict of extra tags to add on aws resources. format { "foo" = "bar" }
+
 #
 # Repos
 #
