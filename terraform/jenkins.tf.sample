@@ -26,10 +26,6 @@ module "jenkins" {
   #+ Amazon subnets IDs on which create each components.
   public_subnets_ids = data.terraform_remote_state.infrastructure.outputs.infra_public_subnets
 
-  #. private_subnets_ids (optional, array): []
-  #+ Amazon subnets IDs on which create each components. Used when create_rds_database is true.
-  #private_subnets_ids = data.terraform_remote_state.infrastructure.outputs.infra_private_subnets
-
   #. extra_tags (optional): {}
   #+ Dict of extra tags to add on aws resources. format { "foo" = "bar" }.
 

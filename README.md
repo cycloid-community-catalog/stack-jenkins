@@ -12,7 +12,7 @@ SCHEMA IN PROGRESS
 
 In order to run this task, couple elements are required within the infrastructure:
 
-  * Having a VPC with private & public subnets [here](https://docs.aws.amazon.com/vpc/latest/userguide/getting-started-ipv4.html#getting-started-create-vpc)
+  * Having a VPC with public subnets [here](https://docs.aws.amazon.com/vpc/latest/userguide/getting-started-ipv4.html#getting-started-create-vpc)
   * Having an S3 bucket with versioning to store Terraform remote states [here](https://docs.aws.amazon.com/quickstarts/latest/s3backup/step-1-create-bucket.html)
   * Having a bastion server to run Ansible like described [here](https://docs.cycloid.io/advanced-guide/ansible-integration.html#standard-usage)
 
@@ -63,7 +63,6 @@ In order to run this task, couple elements are required within the infrastructur
 |---|---|:---:|:---:|:---:|
 |`bastion_sg_allow`|Amazon source security group ID which will be allowed to connect on Fronts port 22 (ssh).|`-`|``|`False`|
 |`keypair_name`|SSH keypair name to use to deploy ec2 instances.|`-`|`cycloid`|`False`|
-|`private_subnets_ids`|Amazon subnets IDs on which create each components. Used when create_rds_database is true.|`array`|`[]`|`False`|
 |`jenkins_disk_size`|Disk size for the Jenkins server.|`-`|`60`|`False`|
 |`jenkins_type`|Amazon EC2 instance type for Jenkins server.|`-`|`t3.small`|`False`|
 |`public_subnets_ids`|Amazon subnets IDs on which create each components.|`array`|``|`True`|

@@ -16,11 +16,6 @@ variable "keypair_name" {
   default = "cycloid"
 }
 
-variable "private_subnets_ids" {
-  type    = list(string)
-  default = [""]
-}
-
 variable "public_subnets_ids" {
   type = list(string)
 }
