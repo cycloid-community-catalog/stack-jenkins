@@ -6,7 +6,6 @@ module "jenkins" {
   project    = var.project
   env        = var.env
   customer   = var.customer
-  aws_region = var.aws_region
 
   #####################################
 
