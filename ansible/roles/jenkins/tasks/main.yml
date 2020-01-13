@@ -4,7 +4,6 @@
     - name: create jenkins volume storage
       docker_volume:
         name: jenkins-storage
-        recreate: never
         state: present
 
     - name: create jenkins container
