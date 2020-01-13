@@ -19,7 +19,7 @@ platforms:
     groups:
       - tag_env_test
       - tag_project_jenkins
-      - tag_role_ansible
+      - tag_role_jenkins
       - tag_cycloid_io_true
 provisioner:
   name: ansible

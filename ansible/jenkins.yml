@@ -1,5 +1,5 @@
 ---
-- hosts: tag_role_ansible:&tag_project_{{ project }}:&tag_cycloid_io_true:&tag_env_{{ env }}
+- hosts: tag_role_{{ role }}:&tag_project_{{ project }}:&tag_cycloid_io_true:&tag_env_{{ env }}
   become: true
   serial: 50%
 
