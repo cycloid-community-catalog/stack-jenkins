@@ -77,7 +77,6 @@ ansible_params:
   SSH_JUMP_URL: user1@Bastion1
   SSH_PRIVATE_KEYS:
     - ((git_bastion.ssh_key))
-  ANSIBLE_VAULT_PASSWORD: ((raw_ansible_password))
   # ANSIBLE_PLAYBOOK_PATH should be "ansible-playbook/" + (git_ansible_path)
   ANSIBLE_PLAYBOOK_PATH: ansible-playbook/
   ANSIBLE_PLAYBOOK_NAME: playbook.yml
