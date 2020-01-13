@@ -127,7 +127,7 @@ jobs:
           - put: tfstate
             params:
               plan_only: true
-              terraform_source: merged_stack/
+              terraform_source: merged-stack/
 
   # Merge and trigger an apply manually (no autostart of this job)
   - name: terraform-apply
@@ -166,7 +166,7 @@ jobs:
           - put: tfstate
             params:
               plan_run: true
-              terraform_source: merged_stack/
+              terraform_source: merged-stack/
 
   - name: terraform-destroy
     max_in_flight: 1
