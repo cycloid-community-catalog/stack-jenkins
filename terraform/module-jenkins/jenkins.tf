@@ -43,7 +43,6 @@ resource "random_shuffle" "jenkins_subnet_id" {
 resource "aws_instance" "jenkins" {
   ami = data.aws_ami.debian.id
 
-  iam_instance_profile = aws_iam_instance_profile.jenkins.name
   instance_type        = var.jenkins_type
   key_name             = var.keypair_name
   ebs_optimized        = var.jenkins_ebs_optimized
