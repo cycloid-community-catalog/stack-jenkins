@@ -2,13 +2,13 @@
 name: 'Jenkins'
 canonical: 'stack-jenkins'
 description: |
-  'Deploy a standalone Jenkins with Docker components on AWS EC2'
+  Deploy a standalone Jenkins with Docker components on AWS EC2
 keywords:
   - 'jenkins'
   - 'aws'
 author: 'Cycloid'
 image: |
-  'https://raw.githubusercontent.com/cycloid-community-catalog/stack-jenkins/master/icon.png'
+  https://raw.githubusercontent.com/cycloid-community-catalog/stack-jenkins/stacks/logo.png
 type: 'stack'
 technologies:
   - technology: debian
