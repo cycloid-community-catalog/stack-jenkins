@@ -6,7 +6,7 @@ This stack will deploy a Jenkins Docker container on a Amazon EC2 instance with 
 
 # Architecture
 
-SCHEMA IN PROGRESS
+<img src="docs/stack-jenkins.png" width="800">
 
 # Requirements
 
