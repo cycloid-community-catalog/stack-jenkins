@@ -8,7 +8,7 @@ keywords:
   - 'aws'
 author: 'Cycloid'
 image: |
-  https://raw.githubusercontent.com/cycloid-community-catalog/stack-jenkins/stacks/logo.png
+  https://raw.githubusercontent.com/cycloid-community-catalog/stack-jenkins/stacks/icon.png
 type: 'stack'
 technologies:
   - technology: debian
