@@ -9,7 +9,7 @@ keywords:
   - 'docker'
 author: 'Cycloid'
 image: |
-  https://raw.githubusercontent.com/cycloid-community-catalog/stack-jenkins/stacks/icon.png
+  https://raw.githubusercontent.com/cycloid-community-catalog/stack-jenkins/master/icon.png
 type: 'stack'
 technologies:
   - technology: debian
