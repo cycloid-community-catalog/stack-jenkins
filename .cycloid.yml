@@ -6,6 +6,7 @@ description: |
 keywords:
   - 'jenkins'
   - 'aws'
+  - 'docker'
 author: 'Cycloid'
 image: |
   https://raw.githubusercontent.com/cycloid-community-catalog/stack-jenkins/stacks/icon.png
