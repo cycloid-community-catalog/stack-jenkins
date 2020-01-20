@@ -13,10 +13,11 @@ type: 'stack'
 technologies:
   - technology: debian
     version: 9.x
-  - technology: nginx
-    version: 1.1x
   - technology: docker
     version: n/a
+  - technology: jenkins
+    version: 2.215-slim
+
 config:
   # configuration of the pipeline
   pipeline:

@@ -11,7 +11,7 @@
         name: mhutter.docker-systemd-service
       vars:
         container_name: jenkins
-        container_image: "jenkins:{{ jenkins_version }}"
+        container_image: "jenkins/jenkins:{{ jenkins_version }}"
         container_volumes:
           - jenkins-storage:/var/jenkins_home
         container_ports:
