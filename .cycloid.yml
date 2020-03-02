@@ -1,6 +1,7 @@
 ---
 name: 'Jenkins'
 canonical: 'stack-jenkins'
+status: 'public'
 description: |
   Deploy a standalone Jenkins with Docker components on AWS EC2
 keywords:
